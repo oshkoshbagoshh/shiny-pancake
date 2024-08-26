@@ -36,6 +36,97 @@ function wp_faker_seed_page() {
     }
 }
 
+// function wp_faker_seed_data() {
+//     $faker = Factory::create();
+
+//     // Generate Users with profiles
+//     for ($i = 0; $i < 20; $i++) {
+//         $user_id = wp_create_user(
+//             $faker->userName,
+//             $faker->password,
+//             $faker->email
+//         );
+        
+//         $user_meta = [
+//             'first_name' => $faker->firstName,
+//             'last_name' => $faker->lastName,
+//             'description' => $faker->text(200),
+//             'user_location' => $faker->city . ', ' . $faker->country,
+//             'user_occupation' => $faker->jobTitle,
+//             'user_website' => $faker->url,
+//             'user_twitter' => '@' . $faker->userName,
+//             'user_facebook' => 'https://facebook.com/' . $faker->userName,
+//             'user_linkedin' => 'https://linkedin.com/in/' . $faker->userName,
+//         ];
+
+//         foreach ($user_meta as $meta_key => $meta_value) {
+//             update_user_meta($user_id, $meta_key, $meta_value);
+//         }
+
+//         wp_update_user([
+//             'ID' => $user_id,
+//             'display_name' => $user_meta['first_name'] . ' ' . $user_meta['last_name'],
+//         ]);
+//     }
+
+//     // Generate Posts
+//     $users = get_users();
+//     $categories = ['Technology', 'Lifestyle', 'Travel', 'Food', 'Business', 'Health'];
+//     foreach ($categories as $category) {
+//         wp_insert_term($category, 'category');
+//     }
+
+//     for ($i = 0; $i < 100; $i++) {
+//         $post_date = $faker->dateTimeThisYear()->format('Y-m-d H:i:s');
+//         $post_id = wp_insert_post([
+//             'post_title' => $faker->sentence,
+//             'post_content' => $faker->paragraphs(rand(3, 10), true) . 
+//                               "\n\n" . $faker->imageUrl(640, 480, null, true) . 
+//                               "\n\n" . $faker->paragraphs(rand(2, 5), true),
+//             'post_status' => 'publish',
+//             'post_author' => $faker->randomElement($users)->ID,
+//             'post_date' => $post_date,
+//             'post_date_gmt' => get_gmt_from_date($post_date),
+//             'post_type' => 'post',
+//         ]);
+
+//         // Set random categories
+//         $post_categories = $faker->randomElements($categories, rand(1, 3));
+//         wp_set_post_categories($post_id, array_map('get_cat_ID', $post_categories));
+
+//         // Set tags
+//         $tags = $faker->words(rand(3, 8));
+//         wp_set_post_tags($post_id, $tags);
+
+//         // Generate Comments for each post
+//         $comment_count = rand(0, 15);
+//         for ($j = 0; $j < $comment_count; $j++) {
+//             $comment_date = $faker->dateTimeBetween($post_date)->format('Y-m-d H:i:s');
+//             wp_insert_comment([
+//                 'comment_post_ID' => $post_id,
+//                 'comment_author' => $faker->name,
+//                 'comment_author_email' => $faker->email,
+//                 'comment_author_url' => $faker->url,
+//                 'comment_content' => $faker->paragraph(rand(1, 3)),
+//                 'comment_date' => $comment_date,
+//                 'comment_approved' => 1,
+//                 'user_id' => rand(0, 1) ? $faker->randomElement($users)->ID : 0, // 50% chance of being a registered user
+//             ]);
+//         }
+//     }
+
+//     // Generate Pages
+//     for ($i = 0; $i < 10; $i++) {
+//         wp_insert_post([
+//             'post_title' => $faker->words(3, true),
+//             'post_content' => $faker->paragraphs(rand(3, 7), true),
+//             'post_status' => 'publish',
+//             'post_author' => $faker->randomElement($users)->ID,
+//             'post_type' => 'page',
+//         ]);
+//     }
+// }
+
 function wp_faker_seed_data() {
     $faker = Factory::create();
 
@@ -50,7 +141,7 @@ function wp_faker_seed_data() {
         $user_meta = [
             'first_name' => $faker->firstName,
             'last_name' => $faker->lastName,
-            'description' => $faker->text(200),
+            'description' => implode(' ', $faker->sentences(3)), // Changed from text()
             'user_location' => $faker->city . ', ' . $faker->country,
             'user_occupation' => $faker->jobTitle,
             'user_website' => $faker->url,
@@ -80,9 +171,9 @@ function wp_faker_seed_data() {
         $post_date = $faker->dateTimeThisYear()->format('Y-m-d H:i:s');
         $post_id = wp_insert_post([
             'post_title' => $faker->sentence,
-            'post_content' => $faker->paragraphs(rand(3, 10), true) . 
+            'post_content' => implode("\n\n", $faker->paragraphs(rand(3, 10))) . 
                               "\n\n" . $faker->imageUrl(640, 480, null, true) . 
-                              "\n\n" . $faker->paragraphs(rand(2, 5), true),
+                              "\n\n" . implode("\n\n", $faker->paragraphs(rand(2, 5))),
             'post_status' => 'publish',
             'post_author' => $faker->randomElement($users)->ID,
             'post_date' => $post_date,
@@ -107,7 +198,7 @@ function wp_faker_seed_data() {
                 'comment_author' => $faker->name,
                 'comment_author_email' => $faker->email,
                 'comment_author_url' => $faker->url,
-                'comment_content' => $faker->paragraph(rand(1, 3)),
+                'comment_content' => implode(' ', $faker->sentences(rand(1, 3))),
                 'comment_date' => $comment_date,
                 'comment_approved' => 1,
                 'user_id' => rand(0, 1) ? $faker->randomElement($users)->ID : 0, // 50% chance of being a registered user
@@ -118,8 +209,8 @@ function wp_faker_seed_data() {
     // Generate Pages
     for ($i = 0; $i < 10; $i++) {
         wp_insert_post([
-            'post_title' => $faker->words(3, true),
-            'post_content' => $faker->paragraphs(rand(3, 7), true),
+            'post_title' => implode(' ', $faker->words(3)),
+            'post_content' => implode("\n\n", $faker->paragraphs(rand(3, 7))),
             'post_status' => 'publish',
             'post_author' => $faker->randomElement($users)->ID,
             'post_type' => 'page',
