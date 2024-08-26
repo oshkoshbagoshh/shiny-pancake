@@ -5,14 +5,127 @@ Description: Custom theme for Three First Names & Associates
 Version: 1.0
 */
 
-/* You can add your custom styles here, or link to an external stylesheet */
-
-body {
-    font-family: 'Figtree', sans-serif;
-}
-
-h1, h2, h3 {
-    font-family: 'Rubik', sans-serif;
-}
-
-/* Add more custom styles as needed */
+:root {
+    /* Primary Colors */
+    --primary-dark: #1a237e;  /* Deep Blue */
+    --primary-light: #c5cae9; /* Light Lavender */
+    
+    /* Secondary Colors */
+    --secondary-dark: #ff6f00;  /* Deep Orange */
+    --secondary-light: #ffe0b2; /* Light Orange */
+    
+    /* Neutral Colors */
+    --neutral-dark: #212121;  /* Almost Black */
+    --neutral-light: #f5f5f5; /* Off White */
+    
+    /* Accent Color */
+    --accent: #00c853; /* Green */
+  
+    /* Text Colors */
+    --text-dark: #212121;  /* Almost Black */
+    --text-light: #ffffff; /* White */
+  }
+  
+  body {
+      font-family: 'Figtree', sans-serif;
+      color: var(--text-dark);
+      background-color: var(--neutral-light);
+      line-height: 1.6;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+      font-family: 'Rubik', sans-serif;
+      color: var(--primary-dark);
+  }
+  
+  a {
+      color: var(--secondary-dark);
+      text-decoration: none;
+  }
+  
+  a:hover, a:focus {
+      color: var(--accent);
+      text-decoration: underline;
+  }
+  
+  /* Header Styles */
+  .site-header {
+      background-color: var(--primary-dark);
+      color: var(--text-light);
+      padding: 1rem 0;
+  }
+  
+  .site-header a {
+      color: var(--text-light);
+  }
+  
+  /* Navigation Styles */
+  .navbar-light .navbar-nav .nav-link {
+      color: var(--text-light);
+  }
+  
+  .navbar-light .navbar-nav .nav-link:hover,
+  .navbar-light .navbar-nav .nav-link:focus {
+      color: var(--secondary-light);
+  }
+  
+  /* Button Styles */
+  .btn-primary {
+      background-color: var(--secondary-dark);
+      border-color: var(--secondary-dark);
+      color: var(--text-light);
+  }
+  
+  .btn-primary:hover, .btn-primary:focus {
+      background-color: var(--accent);
+      border-color: var(--accent);
+      color: var(--text-light);
+  }
+  
+  /* Section Styles */
+  .bg-light {
+      background-color: var(--primary-light) !important;
+  }
+  
+  /* Footer Styles */
+  .site-footer {
+      background-color: var(--neutral-dark);
+      color: var(--text-light);
+      padding: 2rem 0;
+  }
+  
+  /* Accessibility */
+  .screen-reader-text {
+      border: 0;
+      clip: rect(1px, 1px, 1px, 1px);
+      clip-path: inset(50%);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+      word-wrap: normal !important;
+  }
+  
+  /* High Contrast Mode */
+  @media (prefers-contrast: high) {
+      body {
+          background-color: white;
+          color: black;
+      }
+      
+      a {
+          color: blue;
+      }
+      
+      a:hover, a:focus {
+          color: purple;
+      }
+      
+      .site-header, .site-footer {
+          background-color: black;
+          color: white;
+      }
+  }
+  
