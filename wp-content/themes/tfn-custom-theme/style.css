@@ -1,0 +1,18 @@
+/*
+Theme Name: TFN Custom Theme
+Author: AJ Javadi
+Description: Custom theme for Three First Names & Associates
+Version: 1.0
+*/
+
+/* You can add your custom styles here, or link to an external stylesheet */
+
+body {
+    font-family: 'Figtree', sans-serif;
+}
+
+h1, h2, h3 {
+    font-family: 'Rubik', sans-serif;
+}
+
+/* Add more custom styles as needed */

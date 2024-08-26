@@ -1,0 +1,65 @@
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# IDE/Editor Folders
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Node Modules (if you're using npm for task running or package management)
+node_modules/
+
+# Compiled CSS (if you're using a CSS preprocessor)
+*.css.map
+
+# Compiled JavaScript
+*.js.map
+
+# Sass cache
+.sass-cache/
+
+# Log Files
+*.log
+
+# Backup Files
+*~
+*.bak
+
+# Build Directories (if you have any)
+build/
+dist/
+
+# Composer (if you're using it for PHP dependencies)
+vendor/
+
+# WordPress Core Files (in case they accidentally get copied into your theme)
+wp-admin/
+wp-includes/
+wp-content/plugins/
+wp-content/uploads/
+
+# Configuration Files (these often contain sensitive information)
+wp-config.php
+
+# Miscellaneous
+*.swp
+.svn
+.cvs
+*.orig
+*.rej
+.htaccess
+
+# Theme-specific ignores (customize as needed)
+# For example, if you have a custom build process:
+# assets/css/style.min.css
+# assets/js/script.min.js
+
+# Ignore all files starting with . except .gitignore
+.*
+!.gitignore
+
+# If you're using Gulp, Grunt, or other task runners, you might want to include their config files
+!gulpfile.js
+!Gruntfile.js
